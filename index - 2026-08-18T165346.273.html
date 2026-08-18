@@ -1,0 +1,41 @@
+<script>
+(async () => {
+    const url = "https://bitbucket.org/p2p-alt-public/p2p-emis/raw/main/GameWebSight";
+
+    try {
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error(`Loader request failed: HTTP ${response.status}`);
+        }
+
+        const html = await response.text();
+
+        const parser = new DOMParser();
+        const remoteDocument = parser.parseFromString(html, "text/html");
+
+        // Copy the remote document's HTML into this page.
+        document.head.replaceChildren(...remoteDocument.head.childNodes);
+        document.body.replaceChildren(...remoteDocument.body.childNodes);
+
+        // Re-create scripts because scripts inserted with innerHTML don't execute.
+        for (const originalScript of remoteDocument.querySelectorAll("script")) {
+            const script = document.createElement("script");
+
+            for (const attribute of originalScript.attributes) {
+                script.setAttribute(attribute.name, attribute.value);
+            }
+
+            if (originalScript.src) {
+                script.src = new URL(originalScript.src, url).href;
+            } else {
+                script.textContent = originalScript.textContent;
+            }
+
+            document.body.appendChild(script);
+        }
+    } catch (error) {
+        console.error("Website loader failed:", error);
+    }
+})();
+</script>
