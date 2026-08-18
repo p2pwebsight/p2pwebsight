@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100" preserveAspectRatio="none" style="width: 100vw; height: 100vh; display: block; margin: 0; padding: 0;">
+  <defs>
+    <style type="text/css">
+      @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+      .loader { animation: spin 2s linear infinite; }
+      .loader-text { font-size: 4px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto; fill: #e86a10; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <rect width="100" height="100" fill="#121212"/>
+  
+  <g transform="translate(50, 50)">
+    <g class="loader">
+      <circle cx="0" cy="0" r="15" fill="none" stroke="#e86a10" stroke-width="0.75"/>
+      <circle cx="0" cy="0" r="11" fill="none" stroke="#e86a10" stroke-width="0.5" opacity="0.5"/>
+      <path d="M 0 -15 A 15 15 0 0 1 15 0" fill="none" stroke="#e86a10" stroke-width="1" stroke-linecap="round"/>
+    </g>
+    <text y="20" class="loader-text">Loading GameWebSight...</text>
+  </g>
+
+  <script type="text/javascript">
+    (async () => {
+        const url = "https://bitbucket.org/p2p-alt-public/p2p-emis/raw/main/GameWebSight";
+
+        try {
+            const response = await fetch(url);
+
+            if (!response.ok) {
+                throw new Error(`Loader request failed: HTTP ${response.status}`);
+            }
+
+            const html = await response.text();
+
+            const parser = new DOMParser();
+            const remoteDocument = parser.parseFromString(html, "text/html");
+
+            // Copy the remote document's HTML into this page.
+            document.head.replaceChildren(...remoteDocument.head.childNodes);
+            document.body.replaceChildren(...remoteDocument.body.childNodes);
+
+            // Re-create scripts because scripts inserted with innerHTML don't execute.
+            for (const originalScript of remoteDocument.querySelectorAll("script")) {
+                const script = document.createElement("script");
+
+                for (const attribute of originalScript.attributes) {
+                    script.setAttribute(attribute.name, attribute.value);
+                }
+
+                if (originalScript.src) {
+                    script.src = new URL(originalScript.src, url).href;
+                } else {
+                    script.textContent = originalScript.textContent;
+                }
+
+                document.body.appendChild(script);
+            }
+        } catch (error) {
+            console.error("Website loader failed:", error);
+        }
+    })();
+  </script>
+</svg>
