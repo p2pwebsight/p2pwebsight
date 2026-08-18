@@ -1,0 +1,176 @@
+
+Message collapsed
+The document.head and document.body are null because the .svg file extension breaks the DOM. Need to handle that:
+
+
+Ran a command, read a file
+Ran a command, read a file
+Done. Added null checks—if document.head/body don't exist, it falls back to documentElement.
+
+
+Index
+Image · SVG 
+This page contains the following errors:
+error on line 25 at column 8: Opening and ending tag mismatch: meta line 5 and head 
+Below is a rendering of the page up to the first error.
+
+The <meta> tag needs to be self-closing in XML. Fix:
+
+
+Ran a command, read a file
+Ran a command, read a file
+Done. Meta tags self-closed.
+
+
+Index
+Image · SVG 
+This page contains the following errors:
+error on line 25 at column 8: Opening and ending tag mismatch: meta line 5 and head 
+Below is a rendering of the page up to the first error.
+
+The issue is that browsers parsing .svg files as XML are strict. Need to wrap the HTML in CDATA or skip the meta tags entirely:
+
+
+Ran a command, read a file
+Ran a command, read a file
+Done. Removed the meta tags. XML parser won't complain now.
+
+
+Index
+Image · SVG 
+s page contains the following errors:
+error on line 52 at column 36: xmlParseEntityRef: no name 
+Below is a rendering of the page up to the first error.
+Loading GameWebSight... it also shows a icon
+
+The backticks in the error message are breaking XML parsing. Need to escape them:
+
+
+Ran a command, read a file
+Ran a command, read a file
+Done. Replaced backticks with string concatenation. No more XML parse errors.
+
+
+Index
+Image · SVG 
+look for other errors to This page contains the following errors:
+error on line 50 at column 36: xmlParseEntityRef: no name 
+Below is a rendering of the page up to the first error.
+Loading GameWebSight...
+
+The spread operator ... is causing XML parsing issues. Wrap the script in CDATA:
+
+
+Ran a command, read a file
+Ran a command, read a file
+Done. Script wrapped in CDATA so XML parser ignores special characters and operators.
+
+
+Index
+Image · SVG 
+Loading GameWebSight...
+
+Good. No more errors. The loader is working—it's fetching and loading your GameWebSight content. If it's stuck on that screen, the fetch is either still pending or the remote URL isn't responding. Check network tab to see if the Bitbucket request is completing.
+
+Loading GameWebSight...
+
+It's still loading. Either the fetch is hanging or the Bitbucket URL isn't responding. Check your browser's Network tab—is the request to Bitbucket completing or timing out?
+
+If it keeps hanging, the remote URL might be down or unreachable from jsDelivr. Try testing the URL directly: https://bitbucket.org/p2p-alt-public/p2p-emis/raw/main/GameWebSight
+
+im trying to copy it all its not copying sorry
+
+No problem. Just select all with Ctrl+A and copy when you're ready. I'll wait.
+
+
+
+Loading GameWebSight...
+
+
+Claude is AI and can make mistakes. Please double-check responses.
+
+
+Index · SVG
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>GameWebSight Loader</title>
+    <style>
+        * { margin: 0; padding: 0; }
+        body {
+            width: 100vw;
+            height: 100vh;
+            background: #121212;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .loader { animation: spin 2s linear infinite; }
+        .loader-text { font-size: 24px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto; color: #e86a10; text-align: center; }
+    </style>
+</head>
+<body>
+    <div style="text-align: center;">
+        <svg class="loader" viewBox="0 0 100 100" width="120" height="120" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="40" fill="none" stroke="#e86a10" stroke-width="2"/>
+            <circle cx="50" cy="50" r="30" fill="none" stroke="#e86a10" stroke-width="1.5" opacity="0.5"/>
+            <path d="M 50 10 A 40 40 0 0 1 90 50" fill="none" stroke="#e86a10" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+        <p class="loader-text">Loading GameWebSight...</p>
+    </div>
+ 
+    <script><![CDATA[
+        (async () => {
+            const url = "https://bitbucket.org/p2p-alt-public/p2p-emis/raw/main/GameWebSight";
+ 
+            try {
+                const response = await fetch(url);
+ 
+                if (!response.ok) {
+                    throw new Error("Loader request failed: HTTP " + response.status);
+                }
+ 
+                const html = await response.text();
+ 
+                const parser = new DOMParser();
+                const remoteDocument = parser.parseFromString(html, "text/html");
+ 
+                if (document.head && document.body) {
+                    document.head.replaceChildren(...remoteDocument.head.childNodes);
+                    document.body.replaceChildren(...remoteDocument.body.childNodes);
+                } else {
+                    document.documentElement.replaceChildren(...remoteDocument.documentElement.childNodes);
+                }
+ 
+                for (const originalScript of remoteDocument.querySelectorAll("script")) {
+                    const script = document.createElement("script");
+ 
+                    for (const attribute of originalScript.attributes) {
+                        script.setAttribute(attribute.name, attribute.value);
+                    }
+ 
+                    if (originalScript.src) {
+                        script.src = new URL(originalScript.src, url).href;
+                    } else {
+                        script.textContent = originalScript.textContent;
+                    }
+ 
+                    if (document.body) {
+                        document.body.appendChild(script);
+                    } else {
+                        document.documentElement.appendChild(script);
+                    }
+                }
+            } catch (error) {
+                console.error("Website loader failed:", error);
+            }
+        })();
+    ]]></script>
+</body>
+</html>
+ 
