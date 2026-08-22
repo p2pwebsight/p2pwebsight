@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
+    width="100%"
+    height="100%"
+    style="display:block;margin:0;padding:0;border:0;"
+>
+    <foreignObject
+        x="0"
+        y="0"
+        width="100%"
+        height="100%"
+    >
+        <xhtml:iframe
+            src="data:text/html;base64,YGBgaHRtbA0KPCFET0NUWVBFIGh0bWw+DQo8aHRtbCBsYW5nPSJlbiI+DQo8aGVhZD4NCiAgICA8bWV0YSBjaGFyc2V0PSJVVEYtOCI+DQogICAgPG1ldGEgbmFtZT0idmlld3BvcnQiIGNvbnRlbnQ9IndpZHRoPWRldmljZS13aWR0aCwgaW5pdGlhbC1zY2FsZT0xLjAiPg0KICAgIDx0aXRsZT5HYW1lV2ViU2lnaHQgTG9hZGVyPC90aXRsZT4NCiAgICA8L21ldGE+DQo8L2hlYWQ+DQo8Ym9keT4NCjwvYm9keT4NCjwvaHRtbD4NCg=="
+            style="position:fixed;left:0;top:0;width:100vw;height:100vh;border:0;margin:0;padding:0;display:block;"
+        />
+    </foreignObject>
+</svg>
