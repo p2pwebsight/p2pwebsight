@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
+    width="100%"
+    height="100%"
+    style="display:block;margin:0;padding:0;">
+
+    <foreignObject
+        x="0"
+        y="0"
+        width="100%"
+        height="100%"
+        style="overflow:visible;">
+
+        <xhtml:iframe
+            id="html-frame"
+            frameborder="0"
+            scrolling="auto"
+            style="
+                position:absolute;
+                inset:0;
+                width:100%;
+                height:100%;
+                border:0;
+                margin:0;
+                padding:0;
+                display:block;
+                overflow:auto;
+            ">
+        </xhtml:iframe>
+
+    </foreignObject>
+
+    <script><![CDATA[
+
+(function () {
+
+    const encoded = "PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9ImVuIj4KPGhlYWQ+CjxtZXRhIGNoYXJzZXQ9IlVURi04Ij4KPG1ldGEgbmFtZT0idmlld3BvcnQiIGNvbnRlbnQ9IndpZHRoPWRldmljZS13aWR0aCwgaW5pdGlhbC1zY2FsZT0xLjAiPgo8dGl0bGU+VlBTIEdhdGV3YXk8L3RpdGxlPgoKPHN0eWxlPgogICAgKiB7CiAgICAgICAgYm94LXNpemluZzogYm9yZGVyLWJveDsKICAgIH0KCiAgICBodG1sLCBib2R5IHsKICAgICAgICBtYXJnaW46IDA7CiAgICAgICAgd2lkdGg6IDEwMCU7CiAgICAgICAgaGVpZ2h0OiAxMDAlOwogICAgICAgIG92ZXJmbG93OiBoaWRkZW47CiAgICAgICAgYmFja2dyb3VuZDogIzExMTsKICAgIH0KCiAgICAjc2l0ZSB7CiAgICAgICAgd2lkdGg6IDEwMCU7CiAgICAgICAgaGVpZ2h0OiAxMDAlOwogICAgICAgIGJvcmRlcjogMDsKICAgICAgICBkaXNwbGF5OiBibG9jazsKICAgIH0KCiAgICAjY29udHJvbHMgewogICAgICAgIHBvc2l0aW9uOiBmaXhlZDsKICAgICAgICB0b3A6IDEwcHg7CiAgICAgICAgcmlnaHQ6IDEwcHg7CiAgICAgICAgei1pbmRleDogOTk5OTsKICAgICAgICBkaXNwbGF5OiBmbGV4OwogICAgICAgIGdhcDogNnB4OwogICAgICAgIG9wYWNpdHk6IDA7CiAgICAgICAgdHJhbnNpdGlvbjogb3BhY2l0eSAuMnM7CiAgICB9CgogICAgI2NvbnRyb2xzOmhvdmVyIHsKICAgICAgICBvcGFjaXR5OiAxOwogICAgfQoKICAgIGJ1dHRvbiB7CiAgICAgICAgYm9yZGVyOiAwOwogICAgICAgIGJvcmRlci1yYWRpdXM6IDZweDsKICAgICAgICBwYWRkaW5nOiA4cHggMTJweDsKICAgICAgICBiYWNrZ3JvdW5kOiAjMjIyOwogICAgICAgIGNvbG9yOiB3aGl0ZTsKICAgICAgICBjdXJzb3I6IHBvaW50ZXI7CiAgICB9CgogICAgYnV0dG9uOmhvdmVyIHsKICAgICAgICBiYWNrZ3JvdW5kOiAjMzMzOwogICAgfQo8L3N0eWxlPgo8L2hlYWQ+Cgo8Ym9keT4KCjxpZnJhbWUKICAgIGlkPSJzaXRlIgogICAgc3JjPSJodHRwOi8vMTM1LjE0OC40Mi4yMDg6NTAwMC8iCiAgICBhbGxvdz0iZnVsbHNjcmVlbjsgYXV0b3BsYXk7IGdhbWVwYWQ7IGNsaXBib2FyZC1yZWFkOyBjbGlwYm9hcmQtd3JpdGUiCiAgICBhbGxvd2Z1bGxzY3JlZW4+CjwvaWZyYW1lPgoKPGRpdiBpZD0iY29udHJvbHMiPgogICAgPGJ1dHRvbiBvbmNsaWNrPSJmdWxsc2NyZWVuKCkiPkZ1bGxzY3JlZW48L2J1dHRvbj4KICAgIDxidXR0b24gb25jbGljaz0icmVsb2FkU2l0ZSgpIj5SZWxvYWQ8L2J1dHRvbj4KPC9kaXY+Cgo8c2NyaXB0Pgpjb25zdCBzaXRlID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoInNpdGUiKTsKCmZ1bmN0aW9uIGZ1bGxzY3JlZW4oKSB7CiAgICBpZiAoc2l0ZS5yZXF1ZXN0RnVsbHNjcmVlbikgewogICAgICAgIHNpdGUucmVxdWVzdEZ1bGxzY3JlZW4oKTsKICAgIH0KfQoKZnVuY3Rpb24gcmVsb2FkU2l0ZSgpIHsKICAgIHNpdGUuc3JjID0gc2l0ZS5zcmM7Cn0KPC9zY3JpcHQ+Cgo8L2JvZHk+CjwvaHRtbD4=";
+
+    /*
+     * Decode the original HTML without changing it.
+     */
+    const binary = atob(encoded);
+
+    const bytes = new Uint8Array(binary.length);
+
+    for (let i = 0; i < binary.length; i++) {
+        bytes[i] = binary.charCodeAt(i);
+    }
+
+    const html = new TextDecoder("utf-8").decode(bytes);
+
+    const frame = document.getElementById("html-frame");
+
+    if (!frame) {
+        return;
+    }
+
+    /*
+     * The original HTML goes into the iframe unchanged.
+     */
+    frame.srcdoc = html;
+
+})();
+
+    ]]></script>
+
+</svg>
