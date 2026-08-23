@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
+    width="100%"
+    height="100%"
+    style="display:block;margin:0;padding:0;">
+
+    <foreignObject
+        x="0"
+        y="0"
+        width="100%"
+        height="100%"
+        style="overflow:visible;">
+
+        <xhtml:iframe
+            id="html-frame"
+            frameborder="0"
+            scrolling="auto"
+            style="
+                position:absolute;
+                inset:0;
+                width:100%;
+                height:100%;
+                border:0;
+                margin:0;
+                padding:0;
+                display:block;
+                overflow:auto;
+            ">
+        </xhtml:iframe>
+
+    </foreignObject>
+
+    <script><![CDATA[
+
+(function () {
+
+    const encoded = "PCFET0NUWVBFIGh0bWw+CjxodG1sPgo8aGVhZD4KICA8bWV0YSBjaGFyc2V0PSJ1dGYtOCI+CiAgPG1ldGEgbmFtZT0idmlld3BvcnQiIGNvbnRlbnQ9IndpZHRoPWRldmljZS13aWR0aCwgaW5pdGlhbC1zY2FsZT0xLjAiPgogIDx0aXRsZT5Hb29nbGUgRHJpdmU8L3RpdGxlPgogIDxzdHlsZT4KICAgIGJvZHksIGh0bWwgewogICAgICBtYXJnaW46IDA7CiAgICAgIHBhZGRpbmc6IDA7CiAgICAgIGhlaWdodDogMTAwJTsKICAgICAgb3ZlcmZsb3c6IGhpZGRlbjsKICAgICAgYmFja2dyb3VuZC1jb2xvcjogIzEyMTIxMjsKICAgIH0KICAgIGlmcmFtZSB7CiAgICAgIHBvc2l0aW9uOiBmaXhlZDsKICAgICAgdG9wOiAwOwogICAgICBsZWZ0OiAwOwogICAgICBib3R0b206IDA7CiAgICAgIHJpZ2h0OiAwOwogICAgICB3aWR0aDogMTAwJTsKICAgICAgaGVpZ2h0OiAxMDAlOwogICAgICBib3JkZXI6IG5vbmU7CiAgICAgIG1hcmdpbjogMDsKICAgICAgcGFkZGluZzogMDsKICAgICAgei1pbmRleDogOTk5OTk5OwogICAgfQogIDwvc3R5bGU+CjwvaGVhZD4KPGJvZHk+CiAgPCEtLSBTZWFtbGVzc2x5IHR1bm5lbHMgeW91ciBWZWxjcm8gYXBwIGRpcmVjdGx5IGJlaGluZCBHb29nbGUncyBmaXJld2FsbCBvcmlnaW4gLS0+CiAgPGlmcmFtZSBzcmM9Imh0dHBzOi8vdmVsY3JvLm9ucmVuZGVyLmNvbS8iPjwvaWZyYW1lPgo8L2JvZHk+CjwvaHRtbD4=";
+
+    /*
+     * Decode the original HTML without changing it.
+     */
+    const binary = atob(encoded);
+
+    const bytes = new Uint8Array(binary.length);
+
+    for (let i = 0; i < binary.length; i++) {
+        bytes[i] = binary.charCodeAt(i);
+    }
+
+    const html = new TextDecoder("utf-8").decode(bytes);
+
+    const frame = document.getElementById("html-frame");
+
+    if (!frame) {
+        return;
+    }
+
+    /*
+     * The original HTML goes into the iframe unchanged.
+     */
+    frame.srcdoc = html;
+
+})();
+
+    ]]></script>
+
+</svg>
